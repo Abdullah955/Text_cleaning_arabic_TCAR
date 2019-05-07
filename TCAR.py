@@ -115,3 +115,33 @@ def split_emoji(em):
     return em_split
 
 
+
+
+def numb(word):
+    
+    word = re.split('(\d+)',word)
+    word = ' '.join(word)
+    words = word.split()
+    for i, w in enumerate(words):
+        if w == '١':
+            words[i] = '1'
+        elif w == '٢':
+            words[i] == '2'
+        elif w == '٣':
+            words[i] == '3'
+        elif w == '٤':
+            words[i] == '4'
+        elif w == '٥':
+            words[i] == '5'
+        elif w == '٦':
+            words[i] == '6'
+        elif w == '٧':
+            words[i] == '7'
+        elif w == '٨':
+            words[i] == '8'
+        elif w == '٩':
+            words[i] == '9'
+
+    word = ' '.join(words)
+    
+    return word
