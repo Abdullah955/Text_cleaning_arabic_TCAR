@@ -26,7 +26,8 @@ Example:
     
 Functions: 
 
-1- clean(): clean the sentence from Harakat, one letters and punctuation.
+1- clean(): 
+clean the sentence from Harakat, one letters and punctuation.
     
     TCAR.clean(word)
     
@@ -34,7 +35,8 @@ Result:
 
     'وأعجب كيف يغريني طريقي وموتي فيه أقرب من نجاحي 😷😷'
     
-2- split_emoji(): splitting the sentence and managing the emoji splitting part.
+2- split_emoji():
+splitting the sentence and managing the emoji splitting part.
 
     TCAR.split_emoji(word)
     
@@ -44,7 +46,8 @@ Result:
      
      
      
-3- TCAR.norm(): manage the similar letters.
+3- TCAR.norm(): 
+manage the similar letters.
 
 
     TCAR.norm(word)
