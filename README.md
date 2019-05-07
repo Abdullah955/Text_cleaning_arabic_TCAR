@@ -58,9 +58,15 @@ Result:
 
 
 
+4- TCAR.numb():
+handale arabic number and switch them to english + split the numbers from text.
 
+    word = 'وأعجبُ١ كيف1 يُغريني طريقي، و موتِى فيهِ أقربُ من نجاحي😷😷😷 .'
+    TCAR.numb(word)
+    
+Result:
 
-Next: will be updated to handale arabic number and switch them to english.
+    'وأعجبُ 1 كيف 1 يُغريني طريقي، و موتِى فيهِ أقربُ من نجاحي😷😷😷 .'
 
 
 
