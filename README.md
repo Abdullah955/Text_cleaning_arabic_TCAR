@@ -1,19 +1,22 @@
-# Text_cleaning_arabic_TCAR
+# Text Cleaning Arabic (TCAR)
+
+
 Text cleaning for arabic tweets in python
 
 
 
 Description:
 
-Text cleaning for Arabic tweets (or any kind of social media platforms) that will manage Harakat,suffix and prefix and similar letters like (آ ا) or (ي ى) and solve emoji's split too [😷😷😷] = [😷,😷,😷] insted of making them as one [😷😷😷].
-
+Text cleaning for Arabic tweets (or any kind of social media platforms) that will manage Harakat,suffix and prefix and similar letters like (آ ا) or (ي ى) and solve emoji's split [😷😷😷] = [😷,😷,😷] insted of making them as one [😷😷😷].
+it also solve arabic number and switch them to english numbers.
+Remove duplicated letters from a word
 
 prerequisite:
 
 install:
 
-    emoji
-    pyarabic
+    pip install emoji
+    pip install pyarabic
 
 
 
@@ -26,8 +29,10 @@ Example:
     
 Functions: 
 
-1- clean(): 
+1- clean(punctuations=False,hashtag=True,printable=False): 
 clean the sentence from Harakat, one letters and punctuation.
+printable will remove any none Arabic letters
+hashtag will remove hashtags
     
     TCAR.clean(word)
     
@@ -69,4 +74,9 @@ Result:
     'وأعجبُ 1 كيف 1 يُغريني طريقي، و موتِى فيهِ أقربُ من نجاحي😷😷😷 .'
 
 
+NEXT:
 
+    - handel stopwords in a function
+    - punctuation option (DONE)
+    - handle letters duplication (هههههههه)
+    - add Hashtag removel (DONE)

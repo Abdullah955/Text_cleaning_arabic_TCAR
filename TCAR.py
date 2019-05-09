@@ -10,8 +10,12 @@ import emoji
 # Define the printable need to be removed from the text:
 string.printable = string.printable + '١٢٣٤٥٦٧٨٩٠؟،؛' + '…' + '🇦' + '🇸' + '🇩' \
     + '🇫' + '🇰' + '🇷' + '🇼' + '🇦' + '🇭' + '🇲' + '🇹' + '🇾' + '٪'
-table = str.maketrans(string.printable, ' ' * len(string.printable))
 
+string.punctuation = string.punctuation + '،؟،؛'
+
+
+table_printable = str.maketrans(string.printable, ' ' * len(string.printable))
+table_punctuation = str.maketrans(string.punctuation, ' ' * len(string.punctuation))
 
 # define the Harakat:
 re_hamzated_alif = re.compile(r'[\u0622\u0623\u0625]')
@@ -52,7 +56,7 @@ def norm(token):
 
 
 # clean function will clean the arabic text from any other characters ( punctuations , numbers or one letter words. ( wow letter will be removed too :( ! )
-def clean(words):
+def clean(words,punctuations=False,printable=False,hashtag=True):
     
     #Split joins letters Hell4 to [Hello ,4]
     words = re.split(r'([a-zA-Z]+)', words)
@@ -69,10 +73,13 @@ def clean(words):
     wordsCopy = words.copy()
             
     for word in wordsCopy:
+        # Remove one letter
         if len(word.strip(string.printable)) == 1:
             if word.isalpha():
                 words.remove(word)
-    
+        # Remove Hashtags.
+        elif hashtag and word.startswith('#'):
+                words.remove(word)
 
     words = ' '.join(words)
             # Remove redundant letters (more than 2)
@@ -80,14 +87,25 @@ def clean(words):
             
             # Remove Harakat
     words = araby.strip_tashkeel(words)
-            
-            # Remove string.printable
-            # string.printable = 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!
-            #"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
-    words = words.translate(table)
+
+
+    if printable:
+        # Remove string.printable
+        # string.printable = 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!
+        #"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+        words = words.translate(table_printable)
+
+    if punctuations:
+        # Remove  #"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ 
+        words = words.translate(table_punctuation)
+        
+
             # Here we should use tokenize to split emoji from words
     wordsafterclean = araby.tokenize(words)
     return ' '.join(wordsafterclean)
+
+
+
 
 
 
@@ -111,12 +129,16 @@ def split_emoji(em):
     em_split_emoji = emoji.get_emoji_regexp().split(em)
     em_split_whitespace = [substr.split() for substr in em_split_emoji]
     em_split = functools.reduce(operator.concat, em_split_whitespace)
+    em_split = ' '.join(em_split)
     
     return em_split
 
 
 
 
+
+
+# numb will split numbers from words and switch Arabic numbers to english.
 def numb(word):
     
     word = re.split('(\d+)',word)
@@ -145,3 +167,6 @@ def numb(word):
     word = ' '.join(words)
     
     return word
+
+
+
