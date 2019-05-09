@@ -78,7 +78,7 @@ def clean(words,punctuations=False,printable=False,hashtag=True):
             if word.isalpha():
                 words.remove(word)
         # Remove Hashtags.
-        elif hashtag and word.startswith('#'):
+        elif hashtag and ( word.startswith('#') or word.endswith('#') ):
                 words.remove(word)
 
     words = ' '.join(words)
